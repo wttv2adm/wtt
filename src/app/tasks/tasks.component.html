@@ -1,0 +1,50 @@
+<div class="mainBody">
+  <div class="text-center">
+    <div class="col-md-12">
+      <mat-form-field style="display: none;">
+        <mat-label>Font size</mat-label>
+        <mat-select #fontSize value="16px" (selectionChange)="triggerResize()">
+          <mat-option value="10px">10px</mat-option>
+          <mat-option value="12px">12px</mat-option>
+          <mat-option value="14px">14px</mat-option>
+          <mat-option value="16px">16px</mat-option>
+          <mat-option value="18px">18px</mat-option>
+          <mat-option value="20px">20px</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field [style.fontSize]="fontSize.value" style="width: 50%; margin-right: 10px">
+        <mat-label>Description</mat-label>
+        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field style="width: 20%">
+        <input matInput placeholder="Duration" [(ngModel)]="duration">
+      </mat-form-field>
+
+      <button mat-icon-button color="accent" (click)="addTask()">
+        <mat-icon aria-label="Example icon-button with a heart icon">add_circle_outline</mat-icon>
+      </button>
+    </div>
+
+
+    <div class="example-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" [trackBy]="trackByUid" style="text-align: left;">
+      
+          <!-- Position Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef style="width: 80%"> Desc </th>
+            <td mat-cell *matCellDef="let element"> {{element.data.description}} </td>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef> Duration </th>
+            <td mat-cell *matCellDef="let element"> {{element.data.duration}} </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+  </div>
+</div>

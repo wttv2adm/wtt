@@ -1,0 +1,38 @@
+<div ng-show="isLogged" class="text-right">
+  {{displayName}}
+  
+  <button mat-stroked-button class="btn btn-danger" id="btnLogout" (click)="logout()">Log out</button>
+</div>
+<div class="wtt-body" (click)='changeStatus()'>
+  <p>{{hours | number:'2.0'}}:{{minutes | number:'2.0'}}:{{seconds | number:'2.0'}}</p> 
+</div>
+
+<mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">code</mat-icon>      
+      </ng-template>
+      <app-tasks [userID]='userID'></app-tasks>
+    </mat-tab>
+  
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">access_time</mat-icon>      
+      </ng-template>
+      <app-periods [userID]='userID'></app-periods>
+    </mat-tab>
+  
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">history</mat-icon>      
+      </ng-template>
+      <app-history [userID]='userID'></app-history>
+    </mat-tab>
+  
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">mail_outline</mat-icon>      
+      </ng-template>
+      ...
+    </mat-tab>
+  </mat-tab-group>

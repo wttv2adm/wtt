@@ -1,0 +1,26 @@
+<div class="container text-center">
+  <img src="assets/images/icon1.2.png" height="100px">
+  <div class="col-md-12">
+    <mat-form-field>
+      <input matInput type="email" id="txtEmail" class="form-control form-group" placeholder="Email" [(ngModel)]="email">
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-12">
+    <mat-form-field>
+      <input matInput type="password" id="txtPassword" class="form-control form-group" placeholder="Password" [(ngModel)]="password">
+    </mat-form-field>
+  </div>
+
+  <div class="text-danger" [hidden]="validData" style="padding-bottom:7px;">{{error}}</div>
+  
+  <div class="row">
+    <div class="col-md-3">
+      <button mat-stroked-button id="btnLogin" (click)="login()" style="margin-right: 8px;">Log in</button>
+      <button mat-stroked-button color="accent" id="btnSignUp" (click)="signup()">SignUp</button>
+    </div>
+    <div class="col-md-3" [hidden]="!isLogged">
+      <button mat-stroked-button id="btnLogout" (click)="logout()">Log out</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+@import url( 'https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons');
+
+@font-face {
+    font-family: Orbitron;
+    src: url(/assets/fonts/Orbitron-Regular.ttf) format('truetype'),
+         url(/assets/fonts/Orbitron-Bold.ttf) format('truetype'),
+         url(/assets/fonts/Orbitron-Medium.ttf) format('truetype'),
+         url(/assets/fonts/Orbitron-Black.ttf) format('truetype');
+}
+
+html{
+    background: #303030;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.text-right{
+    text-align: right;
+}
+
+.text-danger{
+    color: red;
+}
+
+.mainBody{
+    padding: 30px;
+}
+
+.wtt-body {
+    background: #009688;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: Orbitron;
+    width: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+  transition-duration: 0.5s;
+}
+
+.wtt-body p{
+    font-size: xx-large;
+    margin: 0px;
+}
+
+.example-container {
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+
+  .mat-tab-label {
+      min-width: 25% !important;
+  }
+  
