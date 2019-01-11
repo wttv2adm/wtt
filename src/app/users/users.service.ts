@@ -36,13 +36,12 @@ export class UsersService {
   }
 
   savePeriod(userID: any, start: any, end: any) {
-    var today = new Date();
-    var jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
-    var elapsed = end - start;
+    var elapsed = end - start + 14400000;
+    var elapsedTime = new Date(elapsed);
     this.firebasedb.collection('Users').doc(userID).collection('Periods').add({
       start: start,
       end: end,
-      elapsed: elapsed
+      elapsed: elapsedTime
     })
   }
 
@@ -50,15 +49,27 @@ export class UsersService {
     this.firebasedb.collection('Users').doc(userID).collection('Tasks').add({
       date: new Date(),
       description: description,
-      duration: duration      
+      duration: duration
     })
   }
 
   getTasks(userID: any): any {
-    return this.firebasedb.collection('Users').doc(userID).collection('Tasks').snapshotChanges();
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return this.firebasedb.collection('Users').doc(userID).collection('Tasks', ref => {
+      return ref
+        .where('date', '>', today)
+        .orderBy('date', 'asc');
+    }).snapshotChanges();
   }
 
   getPeriods(userID: any): any {
-    return this.firebasedb.collection('Users').doc(userID).collection('Periods').snapshotChanges();
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return this.firebasedb.collection('Users').doc(userID).collection('Periods', ref => {
+      return ref
+        .where('start', '>', today)
+        .orderBy('start', 'asc');
+    }).snapshotChanges();
   }
 }

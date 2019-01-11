@@ -9,7 +9,7 @@ import { UsersService } from '../users/users.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  
+
   title = 'WTT';
   name = 'clock';
   interval;
@@ -38,12 +38,19 @@ export class HomeComponent implements OnInit {
             var json = doc.data().status;
             this.running = json.running;
             this.start = json.start;
-            this.calculateTime(this.start.toDate(), new Date(), json)
+            if (this.start) {
+              this.calculateTime(this.start.toDate(), new Date(), json);
+            }
+            else {
+              this.hours = json.hours;
+              this.minutes = json.minutes;
+              this.seconds = json.seconds;
+            }
             if (this.running) {
               this.startTimer();
             }
           }
-        });    
+        });
       }
       else {
         this.isLogged = false;
@@ -61,17 +68,17 @@ export class HomeComponent implements OnInit {
     this.running = !this.running;
     if (this.running) {
       this.start = new Date();
-      //this.hours = this.start.getHours();
-      this.usersService.saveStatus(this.firebasedb.auth.currentUser.uid, this.start.getHours(), this.start.getMinutes(), this.start.getSeconds(), this.running, this.start);
+      this.usersService.saveStatus(this.firebasedb.auth.currentUser.uid, this.hours, this.minutes, this.seconds, this.running, this.start);
       this.startTimer();
     } else {
       this.end = new Date();
       this.usersService.savePeriod(this.firebasedb.auth.currentUser.uid, this.start, this.end);
+      this.usersService.saveStatus(this.firebasedb.auth.currentUser.uid, this.hours, this.minutes, this.seconds, false, null);
       this.pauseTimer();
     }
-    
+
   }
-  
+
   startTimer() {
     this.interval = setInterval(() => {
       this.increaseTime();
@@ -114,18 +121,27 @@ export class HomeComponent implements OnInit {
   }
 
   calculateTime(start: any, now: any, json: any): any {
+    this.start = start;
     var elapsed = now - start
     var h;
     var m;
     var s;
-    h = Math.floor(elapsed/3600000);
+    h = Math.floor(elapsed / 3600000);
     elapsed = elapsed - 3600000 * h;
-    m = Math.floor(elapsed/60000);
+    m = Math.floor(elapsed / 60000);
     elapsed = elapsed - 60000 * m;
-    s = Number(elapsed /1000).toFixed(0).toString();
+    s = Number(elapsed / 1000).toFixed(0).toString();
 
-    this.hours =  h;
-    this.minutes = m;
-    this.seconds = s;
+    this.seconds = Number(s) + json.seconds;
+    if(this.seconds > 59){
+      this.seconds = this.seconds - 60;
+      m++;
+    }
+    this.minutes = m + json.minutes;
+    if(this.minutes > 59){
+      this.minutes = this.minutes - 60;
+      h++;
+    }
+    this.hours = h + json.hours;
   }
 }
