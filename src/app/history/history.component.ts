@@ -7,10 +7,33 @@ import { UsersService } from '../users/users.service';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
+  periodColumns = ['date', 'start', 'end', 'elapsed'];
+  taskColumns = ['description', 'duration'];
+
+  periods: any[];
+  tasks: any[];
   @Input() userID: number;
+  constructor(private usersService: UsersService) {
+  }
+  ngOnChanges() {
+    if (this.userID) {
+      this.usersService.getAllPeriods(this.userID).subscribe(data => {
+        this.periods = data.map(e => {
+          return {
+            data: e.payload.doc.data()
+          };
+        })
+      });
 
-  constructor() { }
-
+      this.usersService.getAllTasks(this.userID).subscribe(data => {
+        this.tasks = data.map(e => {
+          return {
+            data: e.payload.doc.data()
+          };
+        })
+      });
+    }
+  }
   ngOnInit() {
   }
 

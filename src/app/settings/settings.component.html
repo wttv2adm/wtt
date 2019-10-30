@@ -1,0 +1,28 @@
+<div class="container text-center">
+  <h1>Settings</h1>
+  <div class="col-md-12">
+    <mat-form-field>
+      <input matInput class="form-control form-group" placeholder="Name" [(ngModel)]="name">
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-12">
+    <mat-form-field>
+      <input matInput class="form-control form-group" placeholder="Project" [(ngModel)]="project">
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-12">
+    <mat-form-field>
+      <input matInput class="form-control form-group" placeholder="Email To" [(ngModel)]="emailTo">
+    </mat-form-field>
+  </div>
+  <div class="text-danger" [hidden]="validData" style="padding-bottom:7px;">{{error}}</div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <button mat-stroked-button (click)="saveSettings()" style="margin-right: 8px;">Save</button>
+      <button mat-stroked-button color="accent" (click)="back()">Back</button>
+    </div>
+  </div>
+</div>

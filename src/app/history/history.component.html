@@ -1,3 +1,57 @@
-<p>
-  history works!
-</p>
+<div class="mainBody">
+  <div class="text-center">
+    <h2>Periods</h2>
+    <div class="history-container">
+      <table mat-table [dataSource]="periods" [trackBy]="trackByUid" style="text-align: left;">
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.data.start.toDate().toLocaleDateString()}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="start">
+          <th mat-header-cell *matHeaderCellDef> Start </th>
+          <td mat-cell *matCellDef="let element"> {{element.data.start.toDate().toLocaleTimeString()}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="end">
+          <th mat-header-cell *matHeaderCellDef> End </th>
+          <td mat-cell *matCellDef="let element"> {{element.data.end.toDate().toLocaleTimeString()}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="elapsed">
+          <th mat-header-cell *matHeaderCellDef> Elapsed </th>
+          <td mat-cell *matCellDef="let element"> {{element.data.elapsed.toDate().toLocaleTimeString()}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="periodColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: periodColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="mainBody">
+  <div class="text-center">
+    <h2>Tasks</h2>
+    <div class="history-container">
+      <table mat-table [dataSource]="tasks" [trackBy]="trackByUid" style="text-align: left;">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef style="width: 80%"> Desc </th>
+          <td mat-cell *matCellDef="let element"> {{element.data.description}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="duration">
+          <th mat-header-cell *matHeaderCellDef> Duration </th>
+          <td mat-cell *matCellDef="let element"> {{element.data.duration}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="taskColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: taskColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>

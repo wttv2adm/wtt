@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from "@angular/router"
 import { UsersService } from '../users/users.service';
@@ -25,10 +25,9 @@ export class HomeComponent implements OnInit {
 
   displayName: string;
 
-  constructor(private firebasedb: AngularFireAuth, private router: Router, private usersService: UsersService) {
+  constructor(private firebasedb: AngularFireAuth, private ngZone: NgZone, private router: Router, private usersService: UsersService) {
     this.firebasedb.auth.onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
-        console.log(firebaseUser);
         this.displayName = firebaseUser.email;
         this.isLogged = true;
         this.userID = this.firebasedb.auth.currentUser.uid;
@@ -143,5 +142,9 @@ export class HomeComponent implements OnInit {
       h++;
     }
     this.hours = h + json.hours;
+  }
+
+  goSettings(){
+    this.ngZone.run(() => this.router.navigate(['/settings', this.userID])).then()
   }
 }

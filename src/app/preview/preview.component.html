@@ -1,0 +1,109 @@
+<div class="mainBody">
+  <div class="text-center">
+    <mat-form-field class="formInput">
+      <input matInput placeholder="Name" [(ngModel)]="name">
+    </mat-form-field>
+    <mat-form-field class="formInput">
+      <input matInput placeholder="Project" [(ngModel)]="project">
+    </mat-form-field>
+    <mat-form-field class="formInput">
+      <input matInput placeholder="Email To" [(ngModel)]="emailTo">
+    </mat-form-field>
+    <mat-form-field class="formDatePicker">
+      <input matInput [matDatepicker]="picker" placeholder="Report Date" [formControl]="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="text-center">
+      <a mat-stroked-button color="accent" href="mailto:email@address.com?subject=Hello world&body=Line one%0DLine two" (click)="test()">Send Email</a>
+  </div>
+  <style>
+    body {
+      font-size: 16px;
+      font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+    }
+
+    #emailBody {
+      background: white;
+      color: black;
+      padding: 15px
+    }
+  </style>
+
+<div [innerHTML]="myContent"></div>
+  <body id="emailBody">
+    <div style="width:1200px; margin:auto">
+      <div style="width:1200px; margin-bottom:50px">
+        <label style="padding-right: 150px">{{name}}</label>
+        <label style="padding-right: 150px">{{date.value.toLocaleDateString()}}</label>
+        <label>{{project}}</label>
+      </div>
+
+      <div style="margin-bottom:20px">
+        <table style='width:400px;'>
+          <tr>
+            <th style='text-align:left; padding-left:5px'>Your status:</th>
+            <th style='background:#00B050; text-align:left; padding-left:5px'>On time</th>
+          </tr>
+        </table>
+      </div>
+
+      <div style="margin-bottom:50px;">
+        <table style="border-collapse: collapse; border-spacing: 0; width: 1200px; display: table;">
+          <tr>
+            <th style='background:black; color:white; text-align:center; padding-left:5px' colspan='7'>All Meetings and Daily Reports/Scrums:</th>
+          </tr>
+          <tr>
+            <th style="padding-top: 11px; padding-bottom: 11px; background-color: #808080; color: white; border: 1px solid #ddd;">Planned</th>
+            <th style="width:800px; padding-top: 11px; padding-bottom: 11px; background-color: #808080; color: white; border: 1px solid #ddd;">Meeting Name</th>
+            <th style="padding-top: 11px; padding-bottom: 11px; background-color: #808080; color: white; border: 1px solid #ddd;">Hours Spent today</th>
+          </tr>
+          <tbody [innerHTML]="meetings" id="meetingsBody">
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-bottom:50px;">
+        <table style="border-collapse: collapse; border-spacing: 0; width: 1200px; display: table;">
+          <tr>
+            <th style='background:black; color:white; text-align:center; padding-left:5px' colspan='7'>Assignments in Monday/Rally/FreshDesk/TestLodge</th>
+          </tr>
+          <tr>
+            <th style="padding-top: 11px; padding-bottom: 11px; background-color: #808080; color: white; border: 1px solid #ddd;">User Story</th>
+            <th style="padding-top: 11px; padding-bottom: 11px; background-color: #808080; color: white; border: 1px solid #ddd;">ETA</th>
+            <th style="padding-top: 11px; padding-bottom: 11px; background-color: #808080; color: white; border: 1px solid #ddd;">Task</th>
+            <th style="width:500px; padding-top: 11px; padding-bottom: 11px; background-color: #808080; color: white; border: 1px solid #ddd;">Comments</th>
+            <th style="padding-top: 11px; padding-bottom: 11px; background-color: #808080; color: white; border: 1px solid #ddd;">Hours Spent today</th>
+            <th style="padding-top: 11px; padding-bottom: 11px; background-color: #808080; color: white; border: 1px solid #ddd;">Overall Progress</th>
+            <th style="padding-top: 11px; padding-bottom: 11px; background-color: #808080; color: white; border: 1px solid #ddd;">Status</th>
+          </tr>
+          <tbody [innerHTML]="workItems">
+          </tbody>
+        </table>
+      </div>
+
+
+      <div style="margin-bottom:50px;">
+        <table style="border-collapse: collapse; border-spacing: 0; width: 1200px; display: table;">
+          <tr>
+            <th style='background:black; color:white; text-align:center; padding-left:5px' colspan='7'>Problems or blocks</th>
+          </tr>
+          <tr>
+            <td style="text-align:center; border: 1px solid #ddd; height:15px"> Notes</td>
+          </tr>
+          <tr>
+            <td style="text-align:center; border: 1px solid #ddd; height:15px"></td>
+          </tr>
+          <tr>
+            <td style="text-align:center; border: 1px solid #ddd; height:15px"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div>Regards,</div>
+      <div>{{name}}.</div>
+    </div>
+  </body>
+</div>

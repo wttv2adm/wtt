@@ -52,8 +52,10 @@ html{
     margin: 0px;
 }
 
-.example-container {
-    overflow: auto;
+.history-container {
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   
   table {
@@ -64,3 +66,18 @@ html{
       min-width: 25% !important;
   }
   
+  .formInput{
+      margin-right: 25px;
+      width: 250px
+  }
+
+  .formDatePicker{
+      width: 100%;
+      margin-right: 25px;
+      max-width: 250px;
+  }
+
+  td{
+      padding-top: 7px !important;
+      padding-bottom: 7px !important;
+  }

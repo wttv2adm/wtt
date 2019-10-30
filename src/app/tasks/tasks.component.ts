@@ -31,6 +31,9 @@ export class TasksComponent implements OnInit {
   }
 
   addTask() {
+    this.description = encodeURI(this.description)
+    this.description = this.description.replace(/%0A/g,'<br>');
+    this.description = decodeURI(this.description);
     this.usersService.saveTask(this.userID, this.description, this.duration);
     this.description = '';
     this.duration = '';

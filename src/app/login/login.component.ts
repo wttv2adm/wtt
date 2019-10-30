@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from "@angular/router"
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
@@ -26,11 +26,11 @@ export class LoginComponent implements OnInit {
   validData: boolean = true;
   error: string;
 
-  constructor(private firebasedb: AngularFireAuth, private router: Router, private usersService: UsersService) {
+  constructor(private firebasedb: AngularFireAuth, private ngZone: NgZone, private router: Router, private usersService: UsersService) {
     this.firebasedb.auth.onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
         this.isLogged = true;
-        this.router.navigate(['/home']);
+        this.ngZone.run(() => this.router.navigate(['/home'])).then();
       }
       else {
         this.isLogged = false;

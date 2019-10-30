@@ -1,5 +1,5 @@
 <div ng-show="isLogged" class="text-right">
-  {{displayName}}
+  <label (click)="goSettings()">{{displayName}}</label> 
   
   <button mat-stroked-button class="btn btn-danger" id="btnLogout" (click)="logout()">Log out</button>
 </div>
@@ -33,6 +33,6 @@
       <ng-template mat-tab-label>
         <mat-icon class="example-tab-icon">mail_outline</mat-icon>      
       </ng-template>
-      ...
+      <app-preview [userID]='userID'></app-preview>
     </mat-tab>
   </mat-tab-group>

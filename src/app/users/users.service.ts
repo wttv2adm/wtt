@@ -19,6 +19,14 @@ export class UsersService {
     });
   }
 
+  saveSettings(userID, name, emailTo, project) {
+    this.firebasedb.collection('Users').doc(userID).update({
+      name: name,
+      emailTo: emailTo,
+      project: project,
+    });
+  }
+
   getInfo(userID) {
     return this.firebasedb.collection('Users').doc(userID).get();
   }
@@ -69,6 +77,24 @@ export class UsersService {
     return this.firebasedb.collection('Users').doc(userID).collection('Periods', ref => {
       return ref
         .where('start', '>', today)
+        .orderBy('start', 'asc');
+    }).snapshotChanges();
+  }
+
+  getAllTasks(userID: any): any {
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return this.firebasedb.collection('Users').doc(userID).collection('Tasks', ref => {
+      return ref
+        .orderBy('date', 'asc');
+    }).snapshotChanges();
+  }
+
+  getAllPeriods(userID: any): any {
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return this.firebasedb.collection('Users').doc(userID).collection('Periods', ref => {
+      return ref
         .orderBy('start', 'asc');
     }).snapshotChanges();
   }
